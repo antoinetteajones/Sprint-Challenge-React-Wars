@@ -4,14 +4,13 @@ import axios from "axios";
 import StarWars from "../src/components/StarWars";
 
 const App = () => {
-  const [war, setWar] = useState({})
+  const [war, setWar] = useState([])
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
 useEffect(() => {
   axios
     .get("https://swapi.co/api/people/")
       .then(response =>{
-        console.log(response.data.results)
         const war = response.data.results;
         console.log(war)
         setWar(war);
@@ -28,7 +27,7 @@ useEffect(() => {
     <div>
     {war.map(char => {
       return(
-        <StarWars 
+        <StarWars key = {char.id}
         name = {char.name}
         birth = {char.birth_year}
         gender = {char.gender}
